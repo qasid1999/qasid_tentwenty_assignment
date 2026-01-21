@@ -13,7 +13,9 @@ class _MovieListScreenState extends BaseStateful<MovieListScreen> {
   @override
   void initState() {
     callAfterFrame(() {
-      MovieServices.getMoviesList();
+      if (readProvider<MovieController>().movieListModel == null) {
+        MovieServices.getMoviesList();
+      }
       readProvider<MovieController>().initializeScrollController();
     });
     super.initState();
@@ -56,9 +58,11 @@ class _MovieListScreenState extends BaseStateful<MovieListScreen> {
                   children: [
                     InkWell(
                       onTap: () {
-                        MovieServices.movieDetails((data.id ?? -1).toString()).then((value){
-                          if(value){
-                            Navigator.pushNamed(context, RoutesPaths.movieDetails);
+                        MovieServices.movieDetails((data.id ?? -1).toString())
+                            .then((value) {
+                          if (value) {
+                            Navigator.pushNamed(
+                                context, RoutesPaths.movieDetails);
                           }
                         });
                       },

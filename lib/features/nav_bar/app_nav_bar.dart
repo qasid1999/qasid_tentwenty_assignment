@@ -15,50 +15,69 @@ class AppNavBar extends StatelessWidget {
           }
         },
         child: Scaffold(
-          bottomNavigationBar: Container(
-            height: 80.h,
-            decoration: BoxDecoration(
-              color: context.secondaryColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(
-                  25.r,
-                ),
-                topRight: Radius.circular(
-                  25.r,
-                ),
+          body: Stack(
+            children: [
+              // Main body content with bottom padding
+              Padding(
+                padding: EdgeInsets.only(bottom: 75.h),
+                child: dashboardProvider.bodies[dashboardProvider.selectBtmIndex],
               ),
-            ),
-            child: BottomNavigationBar(
-              backgroundColor: Colors.transparent,
-              showSelectedLabels: true,
-              currentIndex: dashboardProvider.selectBtmIndex,
-              showUnselectedLabels: true,
-              selectedItemColor: context.onSecondaryColor,
-              selectedLabelStyle:
-                  context.labelSmall!.copyWith(color: context.onSecondaryColor),
-              unselectedLabelStyle:
-                  context.labelSmall?.copyWith(color: context.darkGrey),
-              unselectedItemColor: context.darkGrey,
-              onTap: dashboardProvider.setSelectedBtmIndex,
-              type: BottomNavigationBarType.fixed,
-              items: List.generate(
-                dashboardProvider.icons.length,
-                (index) => BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: EdgeInsets.only(bottom: 5.0.h),
-                    child: SvgPicture.asset(
-                      dashboardProvider.icons[index],
-                      color: dashboardProvider.selectBtmIndex == index
-                          ? context.onSecondaryColor
-                          : context.darkGrey,
+              
+              // Custom bottom navigation bar
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: Container(
+                  height: 75.h,
+                  decoration: BoxDecoration(
+                    color: context.secondaryColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25.r),
+                      topRight: Radius.circular(25.r),
                     ),
                   ),
-                  label: dashboardProvider.labels[index],
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: List.generate(
+                      dashboardProvider.icons.length,
+                      (index) => Expanded(
+                        child: InkWell(
+                          onTap: () => dashboardProvider.setSelectedBtmIndex(index),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 5.0.h),
+                                child: SvgPicture.asset(
+                                  dashboardProvider.icons[index],
+                                  color: dashboardProvider.selectBtmIndex == index
+                                      ? context.onSecondaryColor
+                                      : context.darkGrey,
+                                ),
+                              ),
+                              Text(
+                                dashboardProvider.labels[index],
+                                style: dashboardProvider.selectBtmIndex == index
+                                    ? context.labelSmall!.copyWith(
+                                        color: context.onSecondaryColor,
+                                      )
+                                    : context.labelSmall?.copyWith(
+                                        color: context.darkGrey,
+                                      ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-          body: dashboardProvider.bodies[dashboardProvider.selectBtmIndex],
         ),
       );
     });
