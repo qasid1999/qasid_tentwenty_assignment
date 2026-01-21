@@ -6,6 +6,4 @@ class NetworkPaths {
   static const String movieListEndPoint = "upcoming";
   static const String movieDetailsEndPoint = baseUrl;
   static const String trailerEndPoint = "videos";
-
-
 }

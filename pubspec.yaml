@@ -46,7 +46,7 @@ dependencies:
   cached_network_image: ^3.4.1
   custom_refresh_indicator: ^4.0.1
   flutter_svg: ^2.0.17
-  skeletonizer: ^1.4.3
+  skeletonizer: ^2.1.2
   readmore: ^3.0.0
   youtube_player_flutter: ^9.1.1
 

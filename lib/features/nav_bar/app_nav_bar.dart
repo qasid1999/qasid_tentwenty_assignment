@@ -16,7 +16,7 @@ class AppNavBar extends StatelessWidget {
         },
         child: Scaffold(
           bottomNavigationBar: Container(
-            height: 68.h,
+            height: 80.h,
             decoration: BoxDecoration(
               color: context.secondaryColor,
               borderRadius: BorderRadius.only(
